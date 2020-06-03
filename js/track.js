@@ -50,6 +50,14 @@ $(".ghbtn").click((function(obj){
 	});
 }))
 
+$(".upbtn").click((function(obj){
+	ga('send', 'event', {
+	  'eventCategory': 'updates button clicked',
+	  'eventAction': 'clicked',
+	  'eventLabel': 'up'
+	});
+}))
+
 
 $(".whitepaperbtn").click((function(obj){
 	ga('send', 'event', {
