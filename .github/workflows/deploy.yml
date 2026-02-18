@@ -35,8 +35,6 @@ jobs:
 
       - name: Build
         run: pnpm build
-        env:
-          NEXT_PUBLIC_BASE_PATH: /openuba-model-hub
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
