@@ -22,7 +22,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
-              src="/logo-w.png"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-w.png`}
               alt="OpenUBA"
               width={120}
               height={32}

@@ -9,7 +9,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <Image
-                src="/logo-w.png"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-w.png`}
                 alt="OpenUBA"
                 width={100}
                 height={24}
@@ -47,7 +47,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/openuba.pdf"
+                  href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/openuba.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
