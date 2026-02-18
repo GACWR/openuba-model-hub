@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const resources = [
   {
-    image: "/mural.jpeg",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/mural.jpeg`,
     category: "Blog",
     title: "Introducing OpenUBA V2: Modern Security Analytics for All",
     description:
@@ -14,7 +14,7 @@ const resources = [
     comingSoon: true,
   },
   {
-    image: "/medium.jpg",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/medium.jpg`,
     category: "Blog",
     title:
       "Introducing OpenUBA: an open source user behavior analytics platform",
@@ -23,7 +23,7 @@ const resources = [
     href: "https://medium.com/georgia-cyber-warfare-range/introducing-openuba-an-open-source-user-behavior-analytics-platform-powered-by-the-scientific-5d71bc50b808",
   },
   {
-    image: "/framework.jpg",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/framework.jpg`,
     category: "Architecture",
     title: "The OpenUBA Technology Stack v1",
     description:

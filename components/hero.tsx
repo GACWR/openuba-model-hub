@@ -256,7 +256,7 @@ export function Hero() {
             </Button>
           </a>
           <a
-            href="/openuba.pdf"
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/openuba.pdf`}
             target="_blank"
             rel="noopener noreferrer"
           >

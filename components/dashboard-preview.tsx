@@ -121,7 +121,7 @@ export function DashboardPreview() {
             <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-2xl blur-2xl -z-10" />
             <div className="overflow-hidden rounded-xl">
               <Image
-                src="/screenshot.png"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/screenshot.png`}
                 alt="OpenUBA Dashboard — entity monitoring, risk scoring, data management, and anomaly detection"
                 width={1400}
                 height={900}
