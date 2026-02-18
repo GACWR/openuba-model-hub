@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "OpenUBA Model Hub — Open Source Anomaly Detection Models",
   description:
     "Discover, share, and install community-driven anomaly detection models for User Behavior Analytics. scikit-learn, PyTorch, TensorFlow, Keras, NetworkX and more.",
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.png`,
+  },
   openGraph: {
     title: "OpenUBA Model Hub",
     description:
