@@ -1,0 +1,183 @@
+{
+  "version": "1.0.0",
+  "updated": "2025-02-17",
+  "models": [
+    {
+      "name": "basic_model",
+      "slug": "basic-model",
+      "version": "1.0.0",
+      "runtime": "python-base",
+      "framework": "Python",
+      "description": "Basic model demonstrating Spark, Elasticsearch, and local CSV data adapters. Supports both v1 (execute) and v2 (train/infer) interfaces for backward compatibility.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["data-adapter", "spark", "elasticsearch", "csv", "multi-source", "v1-compatible"],
+      "parameters": [
+        {
+          "name": "threshold",
+          "type": "integer",
+          "default": 10000,
+          "description": "Row count threshold for anomaly detection"
+        },
+        {
+          "name": "data_source",
+          "type": "string",
+          "default": "spark",
+          "description": "Data source type",
+          "enum": ["spark", "elasticsearch", "local_csv"]
+        }
+      ],
+      "path": "models/basic_model"
+    },
+    {
+      "name": "model_1",
+      "slug": "model-1",
+      "version": "0.1.0",
+      "runtime": "python-base",
+      "framework": "Python",
+      "description": "Mock model for testing the V2 model interface. Simulates training with 95% accuracy and generates sample inference results. Great reference implementation for building new models.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["mock", "testing", "reference", "v2-interface"],
+      "parameters": [
+        {
+          "name": "sensitivity",
+          "type": "float",
+          "default": 0.85,
+          "description": "Base risk score sensitivity"
+        }
+      ],
+      "path": "models/model_1"
+    },
+    {
+      "name": "model_sklearn",
+      "slug": "model-sklearn",
+      "version": "1.0.0",
+      "runtime": "sklearn",
+      "framework": "scikit-learn",
+      "description": "Isolation Forest anomaly detection using scikit-learn. Identifies statistical outliers using tree-based ensemble methods. Returns risk scores on a 0-100 scale with anomaly classifications.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["isolation-forest", "anomaly-detection", "statistical", "unsupervised", "sklearn"],
+      "parameters": [
+        {
+          "name": "contamination",
+          "type": "float",
+          "default": 0.1,
+          "description": "The proportion of outliers in the data set"
+        },
+        {
+          "name": "random_state",
+          "type": "integer",
+          "default": 42,
+          "description": "Random state for reproducibility"
+        }
+      ],
+      "path": "models/model_sklearn"
+    },
+    {
+      "name": "model_tensorflow",
+      "slug": "model-tensorflow",
+      "version": "1.0.0",
+      "runtime": "tensorflow",
+      "framework": "TensorFlow",
+      "description": "TensorFlow Dense Autoencoder for reconstruction-error-based anomaly detection. Uses a symmetric encoder-decoder architecture with MSE loss to identify anomalous patterns in numeric data.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["autoencoder", "deep-learning", "reconstruction-error", "tensorflow", "neural-network"],
+      "parameters": [
+        {
+          "name": "layers",
+          "type": "integer",
+          "default": 3,
+          "description": "Number of dense layers"
+        },
+        {
+          "name": "units",
+          "type": "integer",
+          "default": 64,
+          "description": "Units per layer"
+        }
+      ],
+      "path": "models/model_tensorflow"
+    },
+    {
+      "name": "model_pytorch",
+      "slug": "model-pytorch",
+      "version": "1.0.0",
+      "runtime": "pytorch",
+      "framework": "PyTorch",
+      "description": "PyTorch Autoencoder for reconstruction-error-based anomaly detection. Uses an encoder-decoder architecture with ReLU activations and MSE loss, trained with Adam optimizer.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["autoencoder", "deep-learning", "reconstruction-error", "pytorch", "neural-network"],
+      "parameters": [
+        {
+          "name": "learning_rate",
+          "type": "float",
+          "default": 0.001,
+          "description": "Learning rate"
+        },
+        {
+          "name": "epochs",
+          "type": "integer",
+          "default": 10,
+          "description": "Number of training epochs"
+        }
+      ],
+      "path": "models/model_pytorch"
+    },
+    {
+      "name": "model_keras",
+      "slug": "model-keras",
+      "version": "1.0.0",
+      "runtime": "tensorflow",
+      "framework": "Keras",
+      "description": "LSTM Autoencoder for sequential and temporal anomaly detection. Uses Keras LSTM layers with RepeatVector architecture, treating features as time steps for sequence reconstruction.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["lstm", "autoencoder", "sequential", "temporal", "keras", "deep-learning"],
+      "parameters": [
+        {
+          "name": "epochs",
+          "type": "integer",
+          "default": 5,
+          "description": "Number of training epochs"
+        },
+        {
+          "name": "batch_size",
+          "type": "integer",
+          "default": 32,
+          "description": "Training batch size"
+        }
+      ],
+      "path": "models/model_keras"
+    },
+    {
+      "name": "model_networkx",
+      "slug": "model-networkx",
+      "version": "1.0.0",
+      "runtime": "networkx",
+      "framework": "NetworkX",
+      "description": "Graph-based anomaly detection using NetworkX. Constructs graphs from entity relationships and uses PageRank centrality to identify anomalous nodes with high connectivity or influence.",
+      "author": "OpenUBA",
+      "license": "Apache-2.0",
+      "tags": ["graph-analysis", "pagerank", "centrality", "network", "relationship", "networkx"],
+      "parameters": [
+        {
+          "name": "max_degree",
+          "type": "integer",
+          "default": 50,
+          "description": "Threshold for node degree anomaly definition"
+        },
+        {
+          "name": "community_detection",
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to run community detection"
+        }
+      ],
+      "path": "models/model_networkx"
+    }
+  ]
+}

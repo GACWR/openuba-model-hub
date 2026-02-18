@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 20% 10%;
+    --card: 220 20% 97%;
+    --card-foreground: 220 20% 10%;
+    --primary: 220 60% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 90%;
+    --secondary-foreground: 220 20% 10%;
+    --muted: 220 15% 90%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 220 15% 90%;
+    --accent-foreground: 220 20% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
+    --ring: 220 60% 50%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+    --primary: 199 70% 55%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 222 30% 14%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 199 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: rgba(10, 15, 30, 0.7);
+    border-color: rgba(100, 150, 255, 0.08);
+  }
+  .glass-card {
+    @apply backdrop-blur-xl rounded-lg border;
+    background: rgba(10, 15, 30, 0.6);
+    border-color: rgba(100, 150, 255, 0.08);
+  }
+  .glass-card:hover {
+    border-color: rgba(100, 150, 255, 0.18);
+  }
+}
