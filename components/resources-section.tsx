@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { trackResourceClick } from "@/lib/analytics";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 const resources = [
   {
@@ -33,8 +35,9 @@ const resources = [
 ];
 
 export function ResourcesSection() {
+  const sectionRef = useTrackSectionView("resources");
   return (
-    <section className="py-24 px-4 relative">
+    <section ref={sectionRef} className="py-24 px-4 relative">
       <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-blue-600/4 rounded-full blur-[140px] -z-10" />
       <div className="mx-auto max-w-7xl">
         <motion.div
@@ -74,6 +77,7 @@ export function ResourcesSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block h-full"
+                  onClick={() => trackResourceClick(r.title, r.href)}
                 >
                   <ResourceCard resource={r} />
                 </a>

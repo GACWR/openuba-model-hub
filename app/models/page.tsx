@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -15,6 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllModels, getFrameworks, type ModelEntry } from "@/lib/models";
+import {
+  trackSearch,
+  trackFrameworkFilter,
+  trackViewToggle,
+  trackModelCardClick,
+  trackClearFilters,
+} from "@/lib/analytics";
 
 const frameworkColors: Record<string, string> = {
   Python: "bg-blue-500/15 text-blue-300 border-blue-500/20",
@@ -36,7 +43,7 @@ function ModelCard({
 
   if (view === "list") {
     return (
-      <Link href={`/models/${model.slug}`}>
+      <Link href={`/models/${model.slug}`} onClick={() => trackModelCardClick(model.name, "hub")}>
         <div className="glass-card p-4 transition-all duration-300 flex items-center gap-4">
           <div className="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
             <Package className="h-4 w-4 text-blue-400" />
@@ -79,7 +86,7 @@ function ModelCard({
   }
 
   return (
-    <Link href={`/models/${model.slug}`}>
+    <Link href={`/models/${model.slug}`} onClick={() => trackModelCardClick(model.name, "hub")}>
       <div className="glass-card p-5 h-full transition-all duration-300 cursor-pointer group flex flex-col">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -143,6 +150,13 @@ export default function ModelsPage() {
   const [activeFramework, setActiveFramework] = useState<string | null>(null);
   const [view, setView] = useState<"grid" | "list">("grid");
 
+  useEffect(() => {
+    if (!query.trim()) return;
+    const timer = setTimeout(() => trackSearch(query, filtered.length), 800);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
   const filtered = useMemo(() => {
     let result = allModels;
     if (activeFramework) {
@@ -194,7 +208,7 @@ export default function ModelsPage() {
                 <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
               </div>
               <button
-                onClick={() => setActiveFramework(null)}
+                onClick={() => { setActiveFramework(null); trackFrameworkFilter(null); }}
                 className={`text-xs px-3 py-1.5 rounded-md transition-colors ${
                   activeFramework === null
                     ? "bg-blue-600/20 text-blue-300 border border-blue-500/20"
@@ -206,9 +220,11 @@ export default function ModelsPage() {
               {frameworks.map((fw) => (
                 <button
                   key={fw}
-                  onClick={() =>
-                    setActiveFramework(activeFramework === fw ? null : fw)
-                  }
+                  onClick={() => {
+                    const next = activeFramework === fw ? null : fw;
+                    setActiveFramework(next);
+                    trackFrameworkFilter(next);
+                  }}
                   className={`text-xs px-3 py-1.5 rounded-md transition-colors ${
                     activeFramework === fw
                       ? "bg-blue-600/20 text-blue-300 border border-blue-500/20"
@@ -222,7 +238,7 @@ export default function ModelsPage() {
               <Button
                 size="sm"
                 variant={view === "grid" ? "secondary" : "ghost"}
-                onClick={() => setView("grid")}
+                onClick={() => { setView("grid"); trackViewToggle("grid"); }}
                 className="h-7 w-7 p-0"
               >
                 <Grid3X3 className="h-3.5 w-3.5" />
@@ -230,7 +246,7 @@ export default function ModelsPage() {
               <Button
                 size="sm"
                 variant={view === "list" ? "secondary" : "ghost"}
-                onClick={() => setView("list")}
+                onClick={() => { setView("list"); trackViewToggle("list"); }}
                 className="h-7 w-7 p-0"
               >
                 <List className="h-3.5 w-3.5" />
@@ -262,6 +278,7 @@ export default function ModelsPage() {
               onClick={() => {
                 setQuery("");
                 setActiveFramework(null);
+                trackClearFilters();
               }}
               className="text-blue-400 text-sm mt-2 hover:underline"
             >

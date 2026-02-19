@@ -11,6 +11,7 @@ import {
   Shield,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 function Highlight({
   icon: Icon,
@@ -83,8 +84,9 @@ const highlights = [
 ];
 
 export function DashboardPreview() {
+  const sectionRef = useTrackSectionView("dashboard_preview");
   return (
-    <section className="py-24 px-4 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 px-4 relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-600/4 rounded-full blur-[160px] -z-10" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-600/4 rounded-full blur-[140px] -z-10" />
 

@@ -19,6 +19,7 @@ import {
   Download,
 } from "lucide-react";
 import type { ModelEntry } from "@/lib/models";
+import { trackBackToModels, trackSourceButtonClick, trackCopyCode } from "@/lib/analytics";
 
 const frameworkColors: Record<string, string> = {
   Python: "bg-blue-500/15 text-blue-300 border-blue-500/20",
@@ -29,7 +30,7 @@ const frameworkColors: Record<string, string> = {
   NetworkX: "bg-slate-500/15 text-slate-300 border-slate-500/20",
 };
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({ text, modelName, codeBlock }: { text: string; modelName?: string; codeBlock?: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <button
@@ -37,6 +38,7 @@ function CopyButton({ text }: { text: string }) {
         navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        if (modelName && codeBlock) trackCopyCode(modelName, codeBlock);
       }}
       className="text-muted-foreground hover:text-foreground transition-colors"
     >
@@ -71,12 +73,14 @@ function CodeBlock({
   iconGradient,
   code,
   language,
+  modelName,
 }: {
   title: string;
   icon: typeof FileCode;
   iconGradient: string;
   code: string;
   language: string;
+  modelName: string;
 }) {
   return (
     <div className="glass-card overflow-hidden">
@@ -89,7 +93,7 @@ function CodeBlock({
             {title}
           </span>
         </div>
-        <CopyButton text={code} />
+        <CopyButton text={code} modelName={modelName} codeBlock={title} />
       </div>
       <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
         <SyntaxHighlighter
@@ -121,6 +125,7 @@ export function ModelDetailClient({
       <div className="mx-auto max-w-5xl">
         <Link
           href="/models"
+          onClick={() => trackBackToModels()}
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Models
@@ -156,6 +161,7 @@ export function ModelDetailClient({
               href={`https://github.com/GACWR/openuba-model-hub/tree/master/${model.path}`}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackSourceButtonClick(model.name)}
             >
               <Button
                 variant="outline"
@@ -173,7 +179,7 @@ export function ModelDetailClient({
             <code className="text-sm font-mono flex-1 text-blue-300">
               $ {installCmd}
             </code>
-            <CopyButton text={installCmd} />
+            <CopyButton text={installCmd} modelName={model.name} codeBlock="install" />
           </div>
 
           {/* Meta */}
@@ -259,6 +265,7 @@ export function ModelDetailClient({
             iconGradient="bg-gradient-to-br from-amber-500 to-orange-600"
             code={modelYaml}
             language="yaml"
+            modelName={model.name}
           />
           <CodeBlock
             title="MODEL.py"
@@ -266,6 +273,7 @@ export function ModelDetailClient({
             iconGradient="bg-gradient-to-br from-blue-500 to-indigo-600"
             code={modelPy}
             language="python"
+            modelName={model.name}
           />
         </div>
       </div>

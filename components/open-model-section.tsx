@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FileCode, Settings2 } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 const syntaxTheme: Record<string, React.CSSProperties> = {
   ...oneDark,
@@ -46,8 +47,9 @@ const pySnippet = `class Model:
         return pd.DataFrame(results)`;
 
 export function OpenModelSection() {
+  const sectionRef = useTrackSectionView("open_model_standard");
   return (
-    <section className="py-24 px-4 relative">
+    <section ref={sectionRef} className="py-24 px-4 relative">
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-blue-600/4 rounded-full blur-[120px] -z-10" />
       <div className="mx-auto max-w-7xl">
         <motion.div

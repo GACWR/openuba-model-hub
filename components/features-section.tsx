@@ -10,6 +10,7 @@ import {
   Container,
   ScrollText,
 } from "lucide-react";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 /* ── Premium icon wrapper with gradient glow ── */
 function FeatureIcon({
@@ -91,8 +92,9 @@ const cardVariants = {
 };
 
 export function FeaturesSection() {
+  const sectionRef = useTrackSectionView("features");
   return (
-    <section id="features" className="py-24 px-4 relative">
+    <section id="features" ref={sectionRef} className="py-24 px-4 relative">
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/4 rounded-full blur-[140px] -z-10" />
       <div className="mx-auto max-w-7xl">
         <motion.div

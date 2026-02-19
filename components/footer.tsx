@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { trackFooterClick } from "@/lib/analytics";
 
 export function Footer() {
   return (
@@ -30,6 +33,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/models"
+                  onClick={() => trackFooterClick("Model Hub", "/models")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Model Hub
@@ -40,6 +44,7 @@ export function Footer() {
                   href="https://github.com/GACWR/OpenUBA"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("OpenUBA", "https://github.com/GACWR/OpenUBA")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   OpenUBA
@@ -50,6 +55,7 @@ export function Footer() {
                   href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/openuba.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("White Paper", "openuba.pdf")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   White Paper
@@ -60,6 +66,7 @@ export function Footer() {
                   href="https://forms.gle/pjNXQid5caBZbMMfA"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("Sign Up for Updates", "https://forms.gle/pjNXQid5caBZbMMfA")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Sign Up for Updates
@@ -77,6 +84,7 @@ export function Footer() {
                   href="https://github.com/GACWR/openuba-model-hub"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("GitHub", "https://github.com/GACWR/openuba-model-hub")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   GitHub
@@ -87,6 +95,7 @@ export function Footer() {
                   href="https://discord.gg/Ps9p9Wy"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("Discord", "https://discord.gg/Ps9p9Wy")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Discord
@@ -97,6 +106,7 @@ export function Footer() {
                   href="https://twitter.com/OpenUBA"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("Twitter", "https://twitter.com/OpenUBA")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Twitter
@@ -114,6 +124,7 @@ export function Footer() {
                   href="https://medium.com/georgia-cyber-warfare-range/introducing-openuba-an-open-source-user-behavior-analytics-platform-powered-by-the-scientific-5d71bc50b808"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("Blog", "medium.com")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Blog
@@ -124,6 +135,7 @@ export function Footer() {
                   href="https://github.com/GACWR/ouba-paper/blob/master/openuba.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackFooterClick("Research Paper", "github.com/GACWR/ouba-paper")}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Research Paper

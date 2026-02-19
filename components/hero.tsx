@@ -3,6 +3,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { trackHeroClick } from "@/lib/analytics";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -234,7 +235,7 @@ export function Hero() {
           transition={{ delay: 0.7 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link href="/models">
+          <Link href="/models" onClick={() => trackHeroClick("Explore Models", "/models")}>
             <Button
               size="lg"
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8"
@@ -246,6 +247,7 @@ export function Hero() {
             href="https://github.com/GACWR/OpenUBA"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackHeroClick("Get Started", "https://github.com/GACWR/OpenUBA")}
           >
             <Button
               size="lg"
@@ -259,6 +261,7 @@ export function Hero() {
             href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/openuba.pdf`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackHeroClick("Read the Paper", "openuba.pdf")}
           >
             <Button
               size="lg"

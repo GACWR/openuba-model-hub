@@ -6,6 +6,8 @@ import { getAllModels } from "@/lib/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Package } from "lucide-react";
+import { trackModelCardClick, trackBrowseAllModels } from "@/lib/analytics";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 const frameworkColors: Record<string, string> = {
   Python: "bg-blue-500/15 text-blue-300 border-blue-500/20",
@@ -18,9 +20,10 @@ const frameworkColors: Record<string, string> = {
 
 export function ModelShowcase() {
   const models = getAllModels();
+  const sectionRef = useTrackSectionView("model_showcase");
 
   return (
-    <section id="models" className="py-24 px-4 relative">
+    <section id="models" ref={sectionRef} className="py-24 px-4 relative">
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-600/4 rounded-full blur-[140px] -z-10" />
       <div className="mx-auto max-w-7xl">
         <motion.div
@@ -62,7 +65,7 @@ export function ModelShowcase() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
               }}
             >
-              <Link href={`/models/${m.slug}`}>
+              <Link href={`/models/${m.slug}`} onClick={() => trackModelCardClick(m.name, "showcase")}>
                 <div className="glass-card p-5 h-full transition-all duration-300 cursor-pointer group hover:ring-1 hover:ring-white/[0.06]">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-semibold text-sm group-hover:text-blue-400 transition-colors">
@@ -108,7 +111,7 @@ export function ModelShowcase() {
           viewport={{ once: true }}
           className="text-center mt-10"
         >
-          <Link href="/models">
+          <Link href="/models" onClick={() => trackBrowseAllModels()}>
             <Button
               variant="outline"
               className="border-blue-500/20 text-blue-300 hover:bg-blue-500/10 gap-2"

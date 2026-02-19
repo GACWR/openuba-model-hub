@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { Database, Cpu, BarChart3, LayoutDashboard } from "lucide-react";
+import { useTrackSectionView } from "@/hooks/use-track-section-view";
 
 function StepIcon({
   icon: Icon,
@@ -53,8 +54,9 @@ const steps = [
 ];
 
 export function ArchitectureSection() {
+  const sectionRef = useTrackSectionView("architecture");
   return (
-    <section id="architecture" className="py-24 px-4 relative">
+    <section id="architecture" ref={sectionRef} className="py-24 px-4 relative">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
