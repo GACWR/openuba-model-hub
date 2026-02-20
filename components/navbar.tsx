@@ -44,7 +44,7 @@ export function Navbar() {
               </Link>
             ))}
             <a
-              href="https://github.com/GACWR/openuba-model-hub"
+              href="https://github.com/GACWR/OpenUBA"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
