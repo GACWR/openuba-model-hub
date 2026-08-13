@@ -36,6 +36,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/docs"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Documentation
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://github.com/GACWR/OpenUBA"
                   target="_blank"
