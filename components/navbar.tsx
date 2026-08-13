@@ -11,6 +11,7 @@ const links = [
   { href: "/#models", label: "Models" },
   { href: "/#architecture", label: "Architecture" },
   { href: "/models", label: "Model Hub" },
+  { href: "/docs", label: "Docs" },
 ];
 
 export function Navbar() {
