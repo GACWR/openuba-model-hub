@@ -1,40 +1,61 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Boxes, Rocket, Package, Upload, ArrowRight } from "lucide-react";
-import { DocHeader, H2, P, A } from "@/components/docs/doc-ui";
-import { NextCard } from "@/components/docs/doc-ui";
+import {
+  Rocket,
+  Boxes,
+  Workflow,
+  Bell,
+  Network,
+  Database,
+  Terminal,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
+import { DocHeader, H2, P, A, UL, LI } from "@/components/docs/doc-ui";
 import { DocFooter } from "@/components/docs/page-footer";
 
 export const metadata: Metadata = {
-  title: "Documentation — OpenUBA Model Hub",
+  title: "Documentation — OpenUBA",
   description:
-    "Learn how to discover, install, and publish anomaly detection models on the OpenUBA Model Hub.",
+    "Documentation for OpenUBA — the open-source User & Entity Behavior Analytics platform: models, rules, anomalies, cases, Kubernetes-native execution, and the community Model Hub.",
 };
 
-const cards = [
+const featureCards = [
   {
-    href: "/docs/quickstart",
-    icon: Rocket,
-    title: "Quickstart",
-    desc: "Install your first model and run it in a few minutes.",
+    href: "/docs/architecture",
+    icon: Network,
+    title: "Platform Architecture",
+    desc: "FastAPI backend, Next.js UI, PostGraphile, a Kubernetes operator, and a Spark + Elasticsearch data layer.",
   },
   {
-    href: "/docs/installing-models",
-    icon: Package,
-    title: "Installing Models",
-    desc: "Browse the catalog and pull models with the CLI or SDK.",
-  },
-  {
-    href: "/docs/model-format",
+    href: "/docs/models",
     icon: Boxes,
-    title: "Model Format",
-    desc: "The MODEL.py + model.yaml contract every model follows.",
+    title: "Models & Execution",
+    desc: "Install, train, and run detection models in an ephemeral, containerized sandbox.",
   },
   {
-    href: "/docs/publishing",
-    icon: Upload,
-    title: "Publishing a Model",
-    desc: "Share your own model with the community.",
+    href: "/docs/rule-canvas",
+    icon: Workflow,
+    title: "Rule Canvas",
+    desc: "A visual, flow-based rule builder that turns model output into alerts.",
+  },
+  {
+    href: "/docs/alerts",
+    icon: Bell,
+    title: "Alerts & Notifications",
+    desc: "Realtime alerts over email (SMTP) and in-app, driven by your rules.",
+  },
+  {
+    href: "/docs/data-pipelines",
+    icon: Database,
+    title: "Data Pipelines",
+    desc: "Dual Elasticsearch + Spark pipelines, ingestion, and reusable source groups.",
+  },
+  {
+    href: "/docs/sdk",
+    icon: Terminal,
+    title: "Python SDK",
+    desc: "Install and run models, query anomalies, and raise alerts from Python.",
   },
 ];
 
@@ -43,20 +64,21 @@ export default function DocsIndex() {
     <>
       <DocHeader
         eyebrow="Documentation"
-        title="OpenUBA Model Hub"
-        intro="The community registry for User & Entity Behavior Analytics models. Discover open, inspectable anomaly-detection models — and publish your own — for the OpenUBA platform."
+        title="OpenUBA"
+        intro="The open-source User & Entity Behavior Analytics platform for security analytics — and the community Model Hub that feeds it."
       />
 
       <P>
-        The Model Hub is the open marketplace behind{" "}
-        <A href="https://github.com/GACWR/OpenUBA">OpenUBA</A>, an open-source
-        UEBA platform for security analytics. Every model here is transparent by
-        design: you can read the source, see its parameters, and install it into
-        your own OpenUBA deployment with a single command. No black boxes.
+        OpenUBA detects anomalous behavior across users and entities using machine
+        learning models you can actually read. It pairs a Kubernetes-native
+        platform — models, rules, anomalies, cases, dashboards, and a rule engine —
+        with an open <A href="/models">Model Hub</A> where those models are
+        discovered and shared. Nothing is a black box: every model&apos;s source,
+        parameters, and behavior are inspectable.
       </P>
 
       <div className="grid sm:grid-cols-2 gap-4 my-8">
-        {cards.map((c) => (
+        {featureCards.map((c) => (
           <Link
             key={c.href}
             href={c.href}
@@ -76,27 +98,63 @@ export default function DocsIndex() {
         ))}
       </div>
 
-      <H2 id="what-you-can-do">What you can do here</H2>
+      <H2 id="two-halves">Two halves, one project</H2>
       <P>
-        Browse the <A href="/models">model catalog</A> to find detection models
-        by framework (scikit-learn, PyTorch, TensorFlow, NetworkX and more),
-        install them with the <code className="font-mono text-blue-300">openuba</code>{" "}
-        CLI or Python SDK, and publish models you have built so other analysts
-        can reuse them.
+        The documentation covers both sides of OpenUBA:
       </P>
+      <UL>
+        <LI>
+          <strong>The platform</strong> — the self-hosted UEBA application. Start
+          with <A href="/docs/architecture">Architecture</A>, then explore{" "}
+          <A href="/docs/rule-canvas">rules</A>,{" "}
+          <A href="/docs/anomalies">anomalies</A>,{" "}
+          <A href="/docs/cases">cases</A>, and{" "}
+          <A href="/docs/kubernetes">Kubernetes-native execution</A>.
+        </LI>
+        <LI>
+          <strong>The Model Hub</strong> — this site. Learn how to{" "}
+          <A href="/docs/installing-models">install models</A>, use the{" "}
+          <A href="/docs/sdk">SDK</A>, and{" "}
+          <A href="/docs/publishing">publish your own</A>.
+        </LI>
+      </UL>
 
-      <H2 id="new-here">New here?</H2>
-      <P>
-        Start with the Quickstart, then read Core Concepts to understand how the
-        registry, the SDK, and the OpenUBA platform fit together.
-      </P>
-
-      <div className="grid gap-4 mt-6">
-        <NextCard
+      <H2 id="paths">Where to start</H2>
+      <div className="grid gap-4 mt-4">
+        <Link
           href="/docs/quickstart"
-          title="Quickstart →"
-          description="Install and run a model in minutes."
-        />
+          className="group glass-card p-5 flex items-center justify-between gap-4 transition-all hover:border-blue-500/25"
+        >
+          <div className="flex items-center gap-3">
+            <Rocket className="h-5 w-5 text-blue-400" />
+            <div>
+              <div className="text-sm font-semibold group-hover:text-blue-300 transition-colors">
+                Quickstart
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Install the SDK and run your first model in minutes.
+              </div>
+            </div>
+          </div>
+          <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-blue-400 shrink-0" />
+        </Link>
+        <Link
+          href="/docs/installation"
+          className="group glass-card p-5 flex items-center justify-between gap-4 transition-all hover:border-blue-500/25"
+        >
+          <div className="flex items-center gap-3">
+            <Sparkles className="h-5 w-5 text-blue-400" />
+            <div>
+              <div className="text-sm font-semibold group-hover:text-blue-300 transition-colors">
+                Install the platform
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Stand up the full OpenUBA stack locally or on a server.
+              </div>
+            </div>
+          </div>
+          <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-blue-400 shrink-0" />
+        </Link>
       </div>
 
       <DocFooter slug="" />

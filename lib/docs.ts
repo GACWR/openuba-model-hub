@@ -1,5 +1,5 @@
 /* Docs navigation manifest — the single source of truth for the sidebar,
-   the mobile menu, and prev/next links. Keep in the order pages should appear. */
+   the mobile menu, search, and prev/next links. Order = reading order. */
 
 export interface DocLink {
   slug: string; // route under /docs ("" is the index)
@@ -18,6 +18,45 @@ export const DOCS_NAV: DocGroup[] = [
       { slug: "", title: "Introduction" },
       { slug: "quickstart", title: "Quickstart" },
       { slug: "concepts", title: "Core Concepts" },
+      { slug: "installation", title: "Installation" },
+    ],
+  },
+  {
+    title: "Platform",
+    items: [
+      { slug: "architecture", title: "Architecture" },
+      { slug: "kubernetes", title: "Kubernetes-Native" },
+      { slug: "data-pipelines", title: "Data Pipelines" },
+      { slug: "graphql", title: "GraphQL API" },
+      { slug: "authentication", title: "Authentication & RBAC" },
+      { slug: "observability", title: "Observability" },
+    ],
+  },
+  {
+    title: "Detection & Investigation",
+    items: [
+      { slug: "anomalies", title: "Anomalies & Entity Risk" },
+      { slug: "cases", title: "Cases" },
+      { slug: "rule-canvas", title: "Rule Canvas" },
+      { slug: "alerts", title: "Alerts & Notifications" },
+      { slug: "scheduling", title: "Scheduling" },
+      { slug: "assistant", title: "LLM Investigation Assistant" },
+    ],
+  },
+  {
+    title: "Models & Execution",
+    items: [
+      { slug: "models", title: "Models & Lifecycle" },
+      { slug: "execution-sandbox", title: "Execution Sandbox" },
+      { slug: "workspaces", title: "Workspaces" },
+      { slug: "registry-adapters", title: "Registry & Adapters" },
+    ],
+  },
+  {
+    title: "Integrations",
+    items: [
+      { slug: "integrations", title: "Overview" },
+      { slug: "splunk", title: "Splunk" },
     ],
   },
   {
@@ -25,11 +64,6 @@ export const DOCS_NAV: DocGroup[] = [
     items: [
       { slug: "installing-models", title: "Installing Models" },
       { slug: "sdk", title: "Python SDK" },
-    ],
-  },
-  {
-    title: "Publishing",
-    items: [
       { slug: "model-format", title: "Model Format" },
       { slug: "publishing", title: "Publishing a Model" },
       { slug: "registry", title: "Registry Reference" },
@@ -37,7 +71,10 @@ export const DOCS_NAV: DocGroup[] = [
   },
   {
     title: "Help",
-    items: [{ slug: "faq", title: "FAQ" }],
+    items: [
+      { slug: "troubleshooting", title: "Troubleshooting" },
+      { slug: "faq", title: "FAQ" },
+    ],
   },
 ];
 
@@ -45,6 +82,10 @@ export const DOCS_FLAT: DocLink[] = DOCS_NAV.flatMap((g) => g.items);
 
 export function docHref(slug: string): string {
   return slug ? `/docs/${slug}` : "/docs";
+}
+
+export function groupOf(slug: string): string | undefined {
+  return DOCS_NAV.find((g) => g.items.some((i) => i.slug === slug))?.title;
 }
 
 export function prevNext(slug: string): { prev?: DocLink; next?: DocLink } {

@@ -1,4 +1,5 @@
 import { DocsSidebar } from "@/components/docs/sidebar";
+import { DocsSearch } from "@/components/docs/search";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <DocsSidebar />
         <article className="min-w-0 flex-1 max-w-3xl">{children}</article>
       </div>
+      <DocsSearch />
     </main>
   );
 }

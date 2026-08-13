@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DOCS_NAV, docHref } from "@/lib/docs";
+import { SearchTrigger } from "@/components/docs/search";
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -49,22 +50,29 @@ export function DocsSidebar() {
 
   return (
     <>
-      {/* mobile toggle */}
-      <button
-        onClick={() => setOpen(true)}
-        className="lg:hidden inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4"
-      >
-        <Menu className="h-4 w-4" /> Docs menu
-      </button>
+      {/* mobile bar: search + menu toggle */}
+      <div className="lg:hidden mb-5 flex items-center gap-3">
+        <SearchTrigger />
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Open docs menu"
+          className="inline-flex items-center gap-2 rounded-lg border border-blue-500/10 bg-white/[0.02] px-3 py-2 text-sm text-muted-foreground hover:text-foreground shrink-0"
+        >
+          <Menu className="h-4 w-4" /> Menu
+        </button>
+      </div>
 
       {/* desktop sidebar */}
       <aside className="hidden lg:block w-60 shrink-0">
-        <div className="sticky top-24">
-          <div className="flex items-center gap-2 px-3 mb-4 text-sm font-semibold">
-            <BookOpen className="h-4 w-4 text-blue-400" />
-            Documentation
+        <div className="sticky top-24 space-y-5">
+          <SearchTrigger />
+          <div>
+            <div className="flex items-center gap-2 px-3 mb-4 text-sm font-semibold">
+              <BookOpen className="h-4 w-4 text-blue-400" />
+              Documentation
+            </div>
+            <NavItems />
           </div>
-          <NavItems />
         </div>
       </aside>
 
