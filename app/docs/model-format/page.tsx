@@ -38,12 +38,12 @@ export default function ModelFormat() {
         title="MODEL.py"
         code={`class Model:
     def train(self, ctx):
-        df = ctx.data                      # input data as a DataFrame
+        df = ctx.df                        # input data as a DataFrame
         # ... fit your estimator ...
         return {"status": "trained"}
 
     def infer(self, ctx):
-        df = ctx.data
+        df = ctx.df
         anomalies = []
         for _, row in df.iterrows():
             score = self.score(row)
@@ -69,12 +69,12 @@ export default function ModelFormat() {
         title="model.yaml"
         code={`name: my_model
 version: 1.0.0
-framework: scikit-learn
+runtime: sklearn
 description: One-line summary of what this detects.
 author: your-handle
 tags: [proxy, anomaly, unsupervised]
 parameters:
-  - name: threshold
+  threshold:
     type: float
     default: 0.8
     description: Score above which an entity is flagged.`}
@@ -85,9 +85,9 @@ parameters:
         rows={[
           [<InlineCode key="1">name</InlineCode>, "yes", "Unique, lowercase, matches the folder name."],
           [<InlineCode key="2">version</InlineCode>, "yes", "Semantic version."],
-          [<InlineCode key="3">framework</InlineCode>, "yes", "scikit-learn, PyTorch, TensorFlow, NetworkX, Python…"],
+          [<InlineCode key="3">runtime</InlineCode>, "yes", <span key="r">The execution image: <InlineCode>python-base</InlineCode>, <InlineCode>sklearn</InlineCode>, <InlineCode>pytorch</InlineCode>, <InlineCode>tensorflow</InlineCode>, or <InlineCode>networkx</InlineCode>.</span>],
           [<InlineCode key="4">description</InlineCode>, "yes", "Shown in the catalog."],
-          [<InlineCode key="5">parameters</InlineCode>, "no", "Tunable knobs surfaced on the model page."],
+          [<InlineCode key="5">parameters</InlineCode>, "no", "Tunable knobs (a map keyed by name) surfaced on the model page."],
         ]}
       />
 

@@ -162,15 +162,16 @@ class RolePermission(Base):
       <P>
         Four roles are valid, defined as{" "}
         <InlineCode>VALID_ROLES = [&quot;admin&quot;, &quot;manager&quot;, &quot;triage&quot;, &quot;analyst&quot;]</InlineCode>.
-        Their seeded permissions live in <InlineCode>core/db/seed.py</InlineCode>.
+        The permissions seeded on startup live in{" "}
+        <InlineCode>DEFAULT_PERMISSIONS</InlineCode> (<InlineCode>core/fastapi_app.py</InlineCode>).
       </P>
       <Table
         head={["Role", "Scope"]}
         rows={[
           [<InlineCode key="1">admin</InlineCode>, "Full read + write on every page. Admin always passes permission checks in code, regardless of table rows."],
-          [<InlineCode key="2">analyst</InlineCode>, "Read on models, entities, rules; read + write on anomalies, cases, alerts, workspaces, data, jobs, visualizations, dashboards, features, experiments, pipelines, schedules."],
-          [<InlineCode key="3">triage</InlineCode>, "Read-only on anomalies and entities; read + write on cases and alerts."],
-          [<InlineCode key="4">manager</InlineCode>, "Elevated read access to user/role administration endpoints; no seeded page-permission rows of its own."],
+          [<InlineCode key="2">analyst</InlineCode>, "Read + write on models, rules, entities, anomalies, workspaces, jobs, pipelines, visualizations, dashboards, features, and experiments; read-only on home, data, alerts, and cases; no access to settings, users, or schedules."],
+          [<InlineCode key="3">triage</InlineCode>, "Read-only on home, rules, alerts, entities, cases, visualizations, and dashboards; no access to data, models, anomalies, schedules, settings, users, workspaces, jobs, pipelines, features, or experiments."],
+          [<InlineCode key="4">manager</InlineCode>, "Read-only on every page (including the users and settings admin views); no write access anywhere."],
         ]}
       />
       <P>

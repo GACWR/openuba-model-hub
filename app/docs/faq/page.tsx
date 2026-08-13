@@ -35,9 +35,10 @@ export default function Faq() {
 
       <H2 id="frameworks">Which frameworks are supported?</H2>
       <P>
-        scikit-learn, PyTorch, TensorFlow, Keras, NetworkX, and plain Python.
-        The framework is declared in each model&apos;s{" "}
-        <A href="/docs/model-format">model.yaml</A>.
+        scikit-learn, PyTorch, TensorFlow, NetworkX, and plain Python — declared
+        as the model&apos;s <InlineCode>runtime</InlineCode> in its{" "}
+        <A href="/docs/model-format">model.yaml</A>. Keras models run on the
+        TensorFlow runtime.
       </P>
 
       <H2 id="contribute">How do I contribute a model?</H2>

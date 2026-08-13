@@ -68,7 +68,7 @@ export default function Page() {
       <H3 id="local-fs">Local filesystem</H3>
       <P>
         The default in development. It scans the model library path (default{" "}
-        <InlineCode>core/model_library</InlineCode>, overridable with <InlineCode>LOCAL_MODEL_PATH</InlineCode>) for
+        <InlineCode>core/model_library</InlineCode>, overridable with <InlineCode>LOCAL_MODEL_CODE_PATH</InlineCode>) for
         subdirectories containing a <InlineCode>model.yaml</InlineCode>, normalizes each manifest, and installs by copying
         the tree into place. This is what makes the reference models available out of the box.
       </P>
@@ -82,10 +82,13 @@ export default function Page() {
       </P>
       <H3 id="openuba-hub">OpenUBA Hub</H3>
       <P>
-        The public registry at <InlineCode>https://openuba.org</InlineCode> (overridable via{" "}
-        <InlineCode>OPENUBA_HUB_URL</InlineCode>). It lists models from the Hub&apos;s <InlineCode>/ml/</InlineCode>{" "}
-        endpoint and fetches per-model manifests from <InlineCode>/ml/&lt;id&gt;</InlineCode>. Hub results are preferred
-        during deduplication because they carry the richest metadata.
+        The public registry, served as a single static JSON document (default{" "}
+        <InlineCode>https://openuba.org/registry/models.json</InlineCode>, overridable
+        via <InlineCode>OPENUBA_HUB_URL</InlineCode>). The adapter fetches that
+        document once and filters it in memory — <InlineCode>list_models</InlineCode>{" "}
+        returns the matching entries and <InlineCode>fetch_model</InlineCode> selects
+        one by name or slug. Hub results are preferred during deduplication because
+        they carry the richest metadata.
       </P>
       <Callout type="tip" title="Which code registry is the default?">
         The default code registry depends on <InlineCode>ENVIRONMENT</InlineCode>: <InlineCode>local_fs</InlineCode> in
@@ -196,8 +199,8 @@ components:
         rows={[
           [<InlineCode key="1">DEFAULT_CODE_REGISTRY</InlineCode>, "Which code adapter is used when none is specified", "local_fs (dev) / github (prod)"],
           [<InlineCode key="2">DEFAULT_WEIGHTS_REGISTRY</InlineCode>, "Which weights adapter is the default", "local_fs"],
-          [<InlineCode key="3">LOCAL_MODEL_PATH</InlineCode>, "Local FS code adapter scan path", "core/model_library"],
-          [<InlineCode key="4">OPENUBA_HUB_URL</InlineCode>, "OpenUBA Hub base URL", "https://openuba.org"],
+          [<InlineCode key="3">LOCAL_MODEL_CODE_PATH</InlineCode>, "Local FS code adapter scan path", "core/model_library"],
+          [<InlineCode key="4">OPENUBA_HUB_URL</InlineCode>, "OpenUBA Hub registry JSON URL", "https://openuba.org/registry/models.json"],
           [<InlineCode key="5">GITHUB_TOKEN</InlineCode>, "GitHub adapter auth (optional)", "—"],
           [<InlineCode key="6">HUGGINGFACE_TOKEN</InlineCode>, "Hugging Face weights adapter auth (optional)", "—"],
           [<InlineCode key="7">KUBEFLOW_REGISTRY_URL</InlineCode>, "Kubeflow weights registry endpoint", "http://localhost:8080"],

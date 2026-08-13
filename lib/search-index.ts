@@ -24,8 +24,10 @@ const DOC_META: Record<string, { description: string; keywords: string }> = {
     keywords: "quickstart get started pip install openuba run model cli sdk",
   },
   concepts: {
-    description: "The registry, the SDK, and the OpenUBA platform.",
-    keywords: "core concepts model registry sdk platform mental model",
+    description:
+      "The vocabulary of OpenUBA — entities, models, anomalies, rules, alerts, cases, source groups — and how a detection flows end to end.",
+    keywords:
+      "core concepts entity model anomaly rule alert case source group detection flow vocabulary platform hub sdk",
   },
   installation: {
     description:

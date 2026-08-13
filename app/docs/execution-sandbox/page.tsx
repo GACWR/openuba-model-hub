@@ -147,17 +147,20 @@ class Model:
           [<InlineCode key="e">elasticsearch</InlineCode>, "HTTP _search against the index, docs flattened from hits", "index_name, query (defaults to match_all), optional size"],
           [<InlineCode key="s">spark</InlineCode>, "Local Spark session reads CSVs from the datasets PVC; table name parsed as dataset_logtype", "table_name"],
           [<InlineCode key="l">local_csv</InlineCode>, "pandas.read_csv of file_path/file_name", "file_path, file_name"],
-          [<InlineCode key="sg">source_group</InlineCode>, "A named group of sources resolved by slug", "source_group_slug"],
-          [<InlineCode key="sp">splunk</InlineCode>, "Handled upstream as a configured source", "(via source configuration)"],
+          [<InlineCode key="sp">splunk</InlineCode>, "Runs an SPL search via the export API; result rows become the DataFrame", "splunk_search, optional splunk_index"],
         ]}
       />
       <P>
         For Spark, the table name follows the convention <InlineCode>{`{dataset}_{logtype}`}</InlineCode> — for example{" "}
         <InlineCode>toy_1_proxy</InlineCode> splits into dataset <InlineCode>toy_1</InlineCode> and log type{" "}
         <InlineCode>proxy</InlineCode> — and the runner picks CSV separators and encodings per log type (tab-separated
-        for ssh/dns/dhcp, space-separated for proxy/bluecoat, and so on). For the broader ingestion picture see{" "}
-        <A href="/docs/data-pipelines">Data Pipelines</A>.
+        for ssh/dns/dhcp, space-separated for proxy/bluecoat, and so on).
       </P>
+      <Callout type="note" title="Source groups resolve upstream">
+        A <InlineCode>source_group</InlineCode> is not one of the runner&apos;s loaders. When a run specifies{" "}
+        <InlineCode>source_group_slug</InlineCode>, the API resolves the named group into a concrete source (one of the
+        above) before the runner is dispatched. See <A href="/docs/data-pipelines">Data Pipelines</A>.
+      </Callout>
 
       <H2 id="lifecycle">A run, step by step</H2>
       <OL>

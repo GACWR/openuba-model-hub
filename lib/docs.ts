@@ -64,6 +64,11 @@ export const DOCS_NAV: DocGroup[] = [
     items: [
       { slug: "installing-models", title: "Installing Models" },
       { slug: "sdk", title: "Python SDK" },
+    ],
+  },
+  {
+    title: "Publishing",
+    items: [
       { slug: "model-format", title: "Model Format" },
       { slug: "publishing", title: "Publishing a Model" },
       { slug: "registry", title: "Registry Reference" },

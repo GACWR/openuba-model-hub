@@ -13,7 +13,7 @@ export default function AssistantPage() {
   return (
     <>
       <DocHeader
-        eyebrow="Platform"
+        eyebrow="Detection & Investigation"
         title="LLM Investigation Assistant"
         intro="A chat window that follows the analyst across the entire product. It streams responses from a provider you choose — Ollama, OpenAI, Claude, or Gemini — and is fed live context about the page you are on and the state of the system."
       />

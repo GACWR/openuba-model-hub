@@ -195,8 +195,8 @@ status:
 # the SDK talks to the platform via OPENUBA_API_URL, using OPENUBA_TOKEN
 openuba.install("model_sklearn")
 
-result = openuba.run("model_sklearn", data=my_events)
-result["anomalies"][:5]`}
+result = openuba.run("model_sklearn", data="events.csv")
+result["results"][:5]`}
       />
       <Callout type="warning" title="Embedding & auth defaults are for local dev">
         The image configures JupyterLab for token-less, XSRF-disabled, iframe-embeddable access so the OpenUBA frontend

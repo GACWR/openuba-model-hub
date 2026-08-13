@@ -255,11 +255,11 @@ curl -X POST "http://localhost:8000/api/v1/models/$MODEL_ID/train?data_source=sp
 # discover and install a reference model from the Hub
 openuba.install("model_sklearn")
 
-# run inference on your own records / dataframe
-result = openuba.run("model_sklearn", data=my_events)
+# run inference over a local data file
+result = openuba.run("model_sklearn", data="events.csv")
 
-for anomaly in result["anomalies"]:
-    print(anomaly["entity_id"], anomaly["risk_score"], anomaly["anomaly_type"])`}
+for row in result["results"]:
+    print(row.get("entity_id"), row.get("risk_score"), row.get("anomaly_type"))`}
       />
 
       <H2 id="model-library">The reference model library</H2>

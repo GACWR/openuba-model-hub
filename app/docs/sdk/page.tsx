@@ -40,7 +40,7 @@ openuba.configure(
         language="python"
         code={`openuba.list_models()                 # catalog from the Hub
 openuba.install("basic_model")        # install locally
-openuba.run("basic_model", data=df)   # run an installed model
+openuba.run("basic_model", data="events.csv")  # run over a local data file
 openuba.list_installed()              # what's installed`}
       />
 

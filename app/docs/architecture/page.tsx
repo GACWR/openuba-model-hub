@@ -70,7 +70,7 @@ export default function Architecture() {
         │ (EXECUTION_MODE=kubernetes)                    │
         ▼               ▼                                ▼
 ┌────────────────┐  ┌─────────────────────────────────────────────────────┐
-│ Data layer     │  │  PostgreSQL 15   (system of record · 31 ORM models)  │
+│ Data layer     │  │  PostgreSQL 15   (system of record · 35 ORM models)  │
 │ Elasticsearch  │  └─────────────────────────────────────────────────────┘
 │ Apache Spark   │              ▲ create UBATraining / UBAInference CR
 └────────────────┘              │
@@ -274,7 +274,7 @@ app.include_router(system.router)   # self-prefixed /api/v1/system
           [
             <InlineCode key="pg">PostgreSQL 15</InlineCode>,
             "System of record",
-            "31 SQLAlchemy ORM models (models, anomalies, entities, cases, rules, users, jobs, and more). Connection is pooled with pool_pre_ping.",
+            "35 SQLAlchemy ORM models (models, anomalies, entities, cases, rules, users, jobs, and more). Connection is pooled with pool_pre_ping.",
           ],
           [
             <InlineCode key="es">Elasticsearch 8.11</InlineCode>,

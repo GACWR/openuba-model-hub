@@ -52,11 +52,11 @@ export default function Quickstart() {
         language="python"
         code={`import openuba
 
-# run an installed model on a dataframe / list of records
-result = openuba.run("basic_model", data=my_events)
+# run an installed model over a local data file (CSV)
+result = openuba.run("basic_model", data="events.csv")
 
-for anomaly in result["anomalies"]:
-    print(anomaly["entity_id"], anomaly["risk_score"])`}
+for row in result["results"]:
+    print(row.get("entity_id"), row.get("risk_score"))`}
       />
 
       <Callout type="tip" title="Using it inside OpenUBA">
